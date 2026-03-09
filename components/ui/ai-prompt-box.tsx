@@ -398,21 +398,19 @@ const PromptInputActions: React.FC<PromptInputActionsProps> = ({ children, class
   </div>
 );
 
-interface PromptInputActionProps extends React.ComponentProps<typeof Tooltip> {
-  tooltip: React.ReactNode;
-  children: React.ReactNode;
-  side?: "top" | "bottom" | "left" | "right";
-}
-const PromptInputAction: React.FC<PromptInputActionProps> = ({
+type PromptInputActionProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  tooltip?: string;
+  side?: "top" | "bottom";
+};
+const PromptInputAction = ({
   tooltip,
   children,
   className,
   side = "top",
-  ...props
-}) => {
+}: PromptInputActionProps) => {
   const { disabled } = usePromptInput();
   return (
-    <Tooltip {...props}>
+    <Tooltip>
       <TooltipTrigger asChild disabled={disabled}>
         {children}
       </TooltipTrigger>
